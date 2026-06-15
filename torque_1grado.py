@@ -16,40 +16,24 @@ i_c = np.zeros(361)
 i_d = np.zeros(361)
 i_e = np.zeros(361)
 
-# Asignar valores + y - segun sentido del bobinado y direccion de la corriente.
-# Falta asignar esta parte
-for k in range(108, 181):
-    i_a[k] = 2
+# Conmutacion pre-fijada (OFFSET = 30 grados): es la que dio el buen resultado
+# (~0.13 Nm promedio, todo positivo). Cada bobina lleva el signo de corriente
+# que hace que su aporte de torque sea siempre del mismo sentido:
+#     i = I0 * sign( sin( ang - phi0 - OFFSET ) )
+I0 = 2.0
+OFFSET = 30.0
+phi0_a = 1.75
+phi0_b = 74.4
+phi0_c = 145.05
+phi0_d = 218.5
+phi0_e = 290.0
 
-for k in range(288, 361):
-    i_a[k] = -2
-
-for k in range(1, 73):
-    i_b[k] = -2
-
-for k in range(181, 253):
-    i_b[k] = 2
-
-for k in range(73, 145):
-    i_c[k] = -2
-
-for k in range(253, 325):
-    i_c[k] = 2
-
-for k in range(145, 217):
-    i_d[k] = -2
-
-for k in range(325, 361):
-    i_d[k] = 2
-
-for k in range(0, 37):
-    i_d[k] = 2
-
-for k in range(37, 108):
-    i_e[k] = 2
-
-for k in range(217, 289):
-    i_e[k] = -2
+for k in range(0, 361):
+    i_a[k] = I0 * np.sign(np.sin(np.deg2rad(k - phi0_a - OFFSET)))
+    i_b[k] = I0 * np.sign(np.sin(np.deg2rad(k - phi0_b - OFFSET)))
+    i_c[k] = I0 * np.sign(np.sin(np.deg2rad(k - phi0_c - OFFSET)))
+    i_d[k] = I0 * np.sign(np.sin(np.deg2rad(k - phi0_d - OFFSET)))
+    i_e[k] = I0 * np.sign(np.sin(np.deg2rad(k - phi0_e - OFFSET)))
 
 
 for k in range(0, 360):
