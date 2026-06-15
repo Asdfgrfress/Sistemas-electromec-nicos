@@ -1,7 +1,7 @@
 import matplotlib.pyplot as plt
 import numpy as np
 
-with open("resultados.txt", "r") as f:
+with open("Resultados.txt", "r") as f:
     datos = [float(line.strip()) for line in f.readlines()]
 
 valores = np.array(datos)
