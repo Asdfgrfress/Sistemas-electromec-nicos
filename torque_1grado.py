@@ -68,6 +68,10 @@ for k in range(0, 360):
     fe.mi_loadsolution()
     fe.mo_zoomnatural()
 
+    fe.mo_showdensityplot(1, 0, 2.5, 0, "bmag")
+    fe.mo_showvectorplot(1, 1)
+
+
     fe.mo_groupselectblock(1)
     torque = fe.mo_blockintegral(22)
     resultado.append(torque)
